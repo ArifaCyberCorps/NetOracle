@@ -1,0 +1,35 @@
+name: netoracle
+
+topology:
+  nodes:
+
+    ce1:
+      kind: linux
+      image: frrouting/frr:latest
+
+    pe1:
+      kind: linux
+      image: frrouting/frr:latest
+
+    p1:
+      kind: linux
+      image: frrouting/frr:latest
+
+    p2:
+      kind: linux
+      image: frrouting/frr:latest
+
+    pe2:
+      kind: linux
+      image: frrouting/frr:latest
+
+    ce2:
+      kind: linux
+      image: frrouting/frr:latest
+
+  links:
+    - endpoints: ["ce1:eth1", "pe1:eth1"]
+    - endpoints: ["pe1:eth2", "p1:eth1"]
+    - endpoints: ["p1:eth2", "p2:eth1"]
+    - endpoints: ["p2:eth2", "pe2:eth1"]
+    - endpoints: ["pe2:eth2", "ce2:eth1"]
