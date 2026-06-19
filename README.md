@@ -4,6 +4,6 @@ Air-Gapped Predictive Copilot for Secure MPLS Operations
 
 ## Current Phase
 
-- ✅ Containerlab Setup
-- ✅ Initial Topology
-- ⏳ Router Configuration
+-  Containerlab Setup
+-  Initial Topology
+-  Router Configuration
