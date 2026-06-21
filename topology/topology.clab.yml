@@ -6,26 +6,38 @@ topology:
     ce1:
       kind: linux
       image: frrouting/frr:latest
+      binds:
+        - ../configs/ce1/frr.conf:/etc/frr/frr.conf
 
     pe1:
       kind: linux
       image: frrouting/frr:latest
+      binds:
+        - ../configs/pe1/frr.conf:/etc/frr/frr.conf
 
     p1:
       kind: linux
       image: frrouting/frr:latest
+      binds:
+        - ../configs/p1/frr.conf:/etc/frr/frr.conf
 
     p2:
       kind: linux
       image: frrouting/frr:latest
+      binds:
+        - ../configs/p2/frr.conf:/etc/frr/frr.conf
 
     pe2:
       kind: linux
       image: frrouting/frr:latest
+      binds:
+        - ../configs/pe2/frr.conf:/etc/frr/frr.conf
 
     ce2:
       kind: linux
       image: frrouting/frr:latest
+      binds:
+        - ../configs/ce2/frr.conf:/etc/frr/frr.conf
 
   links:
     - endpoints: ["ce1:eth1", "pe1:eth1"]
