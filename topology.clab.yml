@@ -1,286 +1,220 @@
 name: netoracle-sdwan
+mgmt:
+  network: clab
+  ipv4-subnet: 192.168.100.0/24
 topology:
   kinds:
-    frr:
-      image: frrouting/frr:9.1
     linux:
       image: ubuntu:22.04
 
   nodes:
     # ============ P ROUTERS (MPLS Core) ============
     dc1-p1:
-      kind: frr
+      kind: linux
+      image: quay.io/frrouting/frr:9.1.0
       mgmt-ipv4: 192.168.100.10
-      config:
-        startup: configs/dc1-p1/frr.conf
-        daemons: configs/dc1-p1/daemons
+      binds:
+        - configs/dc1-p1/frr.conf:/etc/frr/frr.conf
+        - configs/dc1-p1/daemons:/etc/frr/daemons
 
     dc2-p1:
-      kind: frr
+      kind: linux
+      image: quay.io/frrouting/frr:9.1.0
       mgmt-ipv4: 192.168.100.11
-      config:
-        startup: configs/dc2-p1/frr.conf
-        daemons: configs/dc2-p1/daemons
+      binds:
+        - configs/dc2-p1/frr.conf:/etc/frr/frr.conf
+        - configs/dc2-p1/daemons:/etc/frr/daemons
 
     hub-p1:
-      kind: frr
+      kind: linux
+      image: quay.io/frrouting/frr:9.1.0
       mgmt-ipv4: 192.168.100.12
-      config:
-        startup: configs/hub-p1/frr.conf
-        daemons: configs/hub-p1/daemons
+      binds:
+        - configs/hub-p1/frr.conf:/etc/frr/frr.conf
+        - configs/hub-p1/daemons:/etc/frr/daemons
 
     # ============ PE ROUTERS (MPLS Edge) ============
     dc1-pe1:
-      kind: frr
+      kind: linux
+      image: quay.io/frrouting/frr:9.1.0
       mgmt-ipv4: 192.168.100.20
-      config:
-        startup: configs/dc1-pe1/frr.conf
-        daemons: configs/dc1-pe1/daemons
+      binds:
+        - configs/dc1-pe1/frr.conf:/etc/frr/frr.conf
+        - configs/dc1-pe1/daemons:/etc/frr/daemons
 
     dc2-pe1:
-      kind: frr
+      kind: linux
+      image: quay.io/frrouting/frr:9.1.0
       mgmt-ipv4: 192.168.100.21
-      config:
-        startup: configs/dc2-pe1/frr.conf
-        daemons: configs/dc2-pe1/daemons
+      binds:
+        - configs/dc2-pe1/frr.conf:/etc/frr/frr.conf
+        - configs/dc2-pe1/daemons:/etc/frr/daemons
 
     hub-pe1:
-      kind: frr
+      kind: linux
+      image: quay.io/frrouting/frr:9.1.0
       mgmt-ipv4: 192.168.100.22
-      config:
-        startup: configs/hub-pe1/frr.conf
-        daemons: configs/hub-pe1/daemons
+      binds:
+        - configs/hub-pe1/frr.conf:/etc/frr/frr.conf
+        - configs/hub-pe1/daemons:/etc/frr/daemons
 
     # ============ CE ROUTERS (Customer Edge / SD-WAN Overlay) ============
     # Uses custom netoracle/ce-ipsec image with strongSwan pre-installed for IPsec VTI tunnels
     # Overlay: hub-ce1 (AS 65503) is route-reflector with VTI to all 8 spoke CEs
     #          dc2-ce1 ↔ branch5-ce1 have an additional direct VTI peering
     dc1-ce1:
-      kind: frr
+      kind: linux
       image: netoracle/ce-ipsec:9.1
       mgmt-ipv4: 192.168.100.30
-      config:
-        startup: configs/dc1-ce1/frr.conf
-        daemons: configs/dc1-ce1/daemons
+      binds:
+        - configs/dc1-ce1/frr.conf:/etc/frr/frr.conf
+        - configs/dc1-ce1/daemons:/etc/frr/daemons
       exec:
         - setup_ipsec.sh
 
     dc2-ce1:
-      kind: frr
+      kind: linux
       image: netoracle/ce-ipsec:9.1
       mgmt-ipv4: 192.168.100.31
-      config:
-        startup: configs/dc2-ce1/frr.conf
-        daemons: configs/dc2-ce1/daemons
+      binds:
+        - configs/dc2-ce1/frr.conf:/etc/frr/frr.conf
+        - configs/dc2-ce1/daemons:/etc/frr/daemons
       exec:
         - setup_ipsec.sh
 
     hub-ce1:
-      kind: frr
+      kind: linux
       image: netoracle/ce-ipsec:9.1
       mgmt-ipv4: 192.168.100.32
-      config:
-        startup: configs/hub-ce1/frr.conf
-        daemons: configs/hub-ce1/daemons
+      binds:
+        - configs/hub-ce1/frr.conf:/etc/frr/frr.conf
+        - configs/hub-ce1/daemons:/etc/frr/daemons
       exec:
         - setup_ipsec.sh
 
     branch1-ce1:
-      kind: frr
+      kind: linux
       image: netoracle/ce-ipsec:9.1
       mgmt-ipv4: 192.168.100.33
-      config:
-        startup: configs/branch1-ce1/frr.conf
-        daemons: configs/branch1-ce1/daemons
+      binds:
+        - configs/branch1-ce1/frr.conf:/etc/frr/frr.conf
+        - configs/branch1-ce1/daemons:/etc/frr/daemons
       exec:
         - setup_ipsec.sh
 
     branch2-ce1:
-      kind: frr
+      kind: linux
       image: netoracle/ce-ipsec:9.1
       mgmt-ipv4: 192.168.100.34
-      config:
-        startup: configs/branch2-ce1/frr.conf
-        daemons: configs/branch2-ce1/daemons
+      binds:
+        - configs/branch2-ce1/frr.conf:/etc/frr/frr.conf
+        - configs/branch2-ce1/daemons:/etc/frr/daemons
       exec:
         - setup_ipsec.sh
 
     branch3-ce1:
-      kind: frr
+      kind: linux
       image: netoracle/ce-ipsec:9.1
       mgmt-ipv4: 192.168.100.35
-      config:
-        startup: configs/branch3-ce1/frr.conf
-        daemons: configs/branch3-ce1/daemons
+      binds:
+        - configs/branch3-ce1/frr.conf:/etc/frr/frr.conf
+        - configs/branch3-ce1/daemons:/etc/frr/daemons
       exec:
         - setup_ipsec.sh
 
     branch4-ce1:
-      kind: frr
+      kind: linux
       image: netoracle/ce-ipsec:9.1
       mgmt-ipv4: 192.168.100.36
-      config:
-        startup: configs/branch4-ce1/frr.conf
-        daemons: configs/branch4-ce1/daemons
+      binds:
+        - configs/branch4-ce1/frr.conf:/etc/frr/frr.conf
+        - configs/branch4-ce1/daemons:/etc/frr/daemons
       exec:
         - setup_ipsec.sh
 
     branch5-ce1:
-      kind: frr
+      kind: linux
       image: netoracle/ce-ipsec:9.1
       mgmt-ipv4: 192.168.100.37
-      config:
-        startup: configs/branch5-ce1/frr.conf
-        daemons: configs/branch5-ce1/daemons
+      binds:
+        - configs/branch5-ce1/frr.conf:/etc/frr/frr.conf
+        - configs/branch5-ce1/daemons:/etc/frr/daemons
       exec:
         - setup_ipsec.sh
 
     branch6-ce1:
-      kind: frr
+      kind: linux
       image: netoracle/ce-ipsec:9.1
       mgmt-ipv4: 192.168.100.38
-      config:
-        startup: configs/branch6-ce1/frr.conf
-        daemons: configs/branch6-ce1/daemons
+      binds:
+        - configs/branch6-ce1/frr.conf:/etc/frr/frr.conf
+        - configs/branch6-ce1/daemons:/etc/frr/daemons
       exec:
         - setup_ipsec.sh
 
     # ============ TRAFFIC GENERATOR HOSTS ============
     dc1-host:
       kind: linux
+      image: netoracle/host:9.1
       mgmt-ipv4: 192.168.100.50
       exec:
-        - apt-get update && apt-get install -y iperf3 mgen trafgen iproute2 tcpdump net-tools python3 python3-pip
-        - pip3 install scapy pyftpdlib smbprotocol dnslib
         - echo "dc1-host ready" > /tmp/ready
 
     dc2-host:
       kind: linux
+      image: netoracle/host:9.1
       mgmt-ipv4: 192.168.100.51
       exec:
-        - apt-get update && apt-get install -y iperf3 mgen trafgen iproute2 tcpdump net-tools python3 python3-pip
-        - pip3 install scapy pyftpdlib smbprotocol dnslib
         - echo "dc2-host ready" > /tmp/ready
 
     hub-host:
       kind: linux
+      image: netoracle/host:9.1
       mgmt-ipv4: 192.168.100.52
       exec:
-        - apt-get update && apt-get install -y iperf3 mgen trafgen iproute2 tcpdump net-tools python3 python3-pip
-        - pip3 install scapy pyftpdlib smbprotocol dnslib
         - echo "hub-host ready" > /tmp/ready
 
     branch1-host:
       kind: linux
+      image: netoracle/host:9.1
       mgmt-ipv4: 192.168.100.53
       exec:
-        - apt-get update && apt-get install -y iperf3 mgen trafgen iproute2 tcpdump net-tools python3 python3-pip
-        - pip3 install scapy pyftpdlib smbprotocol dnslib
         - echo "branch1-host ready" > /tmp/ready
 
     branch2-host:
       kind: linux
+      image: netoracle/host:9.1
       mgmt-ipv4: 192.168.100.54
       exec:
-        - apt-get update && apt-get install -y iperf3 mgen trafgen iproute2 tcpdump net-tools python3 python3-pip
-        - pip3 install scapy pyftpdlib smbprotocol dnslib
         - echo "branch2-host ready" > /tmp/ready
 
     branch3-host:
       kind: linux
+      image: netoracle/host:9.1
       mgmt-ipv4: 192.168.100.55
       exec:
-        - apt-get update && apt-get install -y iperf3 mgen trafgen iproute2 tcpdump net-tools python3 python3-pip
-        - pip3 install scapy pyftpdlib smbprotocol dnslib
         - echo "branch3-host ready" > /tmp/ready
 
     branch4-host:
       kind: linux
+      image: netoracle/host:9.1
       mgmt-ipv4: 192.168.100.56
       exec:
-        - apt-get update && apt-get install -y iperf3 mgen trafgen iproute2 tcpdump net-tools python3 python3-pip
-        - pip3 install scapy pyftpdlib smbprotocol dnslib
         - echo "branch4-host ready" > /tmp/ready
 
     branch5-host:
       kind: linux
+      image: netoracle/host:9.1
       mgmt-ipv4: 192.168.100.57
       exec:
-        - apt-get update && apt-get install -y iperf3 mgen trafgen iproute2 tcpdump net-tools python3 python3-pip
-        - pip3 install scapy pyftpdlib smbprotocol dnslib
         - echo "branch5-host ready" > /tmp/ready
 
     branch6-host:
       kind: linux
+      image: netoracle/host:9.1
       mgmt-ipv4: 192.168.100.58
       exec:
-        - apt-get update && apt-get install -y iperf3 mgen trafgen iproute2 tcpdump net-tools python3 python3-pip
-        - pip3 install scapy pyftpdlib smbprotocol dnslib
         - echo "branch6-host ready" > /tmp/ready
-
-    # ============ MONITORING STACK ============
-    prometheus:
-      kind: linux
-      mgmt-ipv4: 192.168.100.110
-      image: prom/prometheus:v2.51.0
-      binds:
-        - monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-      entrypoint: prometheus --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus --web.console.libraries=/usr/share/prometheus/console_libraries --web.console.templates=/usr/share/prometheus/consoles --storage.tsdb.retention.time=7d
-
-    grafana:
-      kind: linux
-      mgmt-ipv4: 192.168.100.111
-      image: grafana/grafana:10.4.2
-      binds:
-        - monitoring/grafana/datasources/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
-        - monitoring/grafana/dashboards/dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yml
-        - monitoring/grafana/dashboards/network_overview.json:/var/lib/grafana/dashboards/network_overview.json
-      env:
-        GF_AUTH_ANONYMOUS_ENABLED: "true"
-        GF_AUTH_ANONYMOUS_ORG_ROLE: "Admin"
-        GF_SECURITY_ADMIN_PASSWORD: "admin"
-
-    cadvisor:
-      kind: linux
-      mgmt-ipv4: 192.168.100.112
-      image: gcr.io/cadvisor/cadvisor:v0.49.1
-      binds:
-        - /:/rootfs:ro
-        - /var/run:/var/run:ro
-        - /sys:/sys:ro
-        - /var/lib/docker/:/var/lib/docker:ro
-        - /dev/disk/:/dev/disk:ro
-      privileged: true
-
-    telegraf:
-      kind: linux
-      mgmt-ipv4: 192.168.100.113
-      image: telegraf:1.30
-      binds:
-        - /var/run/docker.sock:/var/run/docker.sock
-        - monitoring/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
-
-    # ============ TELEMETRY COLLECTOR ============
-    telemetry-collector:
-      kind: linux
-      mgmt-ipv4: 192.168.100.100
-      binds:
-        - /var/run/docker.sock:/var/run/docker.sock
-      exec:
-        - apt-get update && apt-get install -y python3 python3-pip net-tools iproute2 tcpdump
-        - pip3 install pyyaml
-        - echo "telemetry-collector ready" > /tmp/ready
-
-    # ============ NTP SERVER (air-gapped time sync) ============
-    ntp-server:
-      kind: linux
-      mgmt-ipv4: 192.168.100.2
-      exec:
-        - apt-get update && apt-get install -y chrony
-        - echo "server 127.127.1.0 iburst" > /etc/chrony/chrony.conf
-        - echo "local stratum 10" >> /etc/chrony/chrony.conf
-        - echo "allow 192.168.100.0/24" >> /etc/chrony/chrony.conf
-        - service chrony restart
 
   links:
     # ============ CORE P-TO-P LINKS ============

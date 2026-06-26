@@ -1,0 +1,1197 @@
+{
+  "name": "netoracle-sdwan",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-28f82f4028ad",
+        "ipv4-subnet": "192.168.100.0/24",
+        "ipv4-gw": "192.168.100.1",
+        "external-access": true
+      }
+    }
+  },
+  "ssh-pub-keys": [],
+  "nodes": {
+    "branch1-ce1": {
+      "index": "0",
+      "shortname": "branch1-ce1",
+      "longname": "clab-netoracle-sdwan-branch1-ce1",
+      "fqdn": "branch1-ce1.netoracle-sdwan.io",
+      "group": "",
+      "labdir": "/home/arenredd/netoracle/clab-netoracle-sdwan/branch1-ce1",
+      "kind": "linux",
+      "image": "netoracle/ce-ipsec:9.1",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "192.168.100.33",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-git-branch": "main",
+        "clab-git-hash": "8a254f0",
+        "clab-mgmt-net-bridge": "br-28f82f4028ad",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/arenredd/netoracle/clab-netoracle-sdwan/branch1-ce1",
+        "clab-node-longname": "clab-netoracle-sdwan-branch1-ce1",
+        "clab-node-name": "branch1-ce1",
+        "clab-node-type": "",
+        "clab-owner": "arenredd",
+        "clab-topo-file": "/home/arenredd/netoracle/topology.clab.yml",
+        "containerlab": "netoracle-sdwan"
+      },
+      "port-bindings": [
+      ]
+    },
+    "branch1-host": {
+      "index": "1",
+      "shortname": "branch1-host",
+      "longname": "clab-netoracle-sdwan-branch1-host",
+      "fqdn": "branch1-host.netoracle-sdwan.io",
+      "group": "",
+      "labdir": "/home/arenredd/netoracle/clab-netoracle-sdwan/branch1-host",
+      "kind": "linux",
+      "image": "netoracle/host:9.1",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "192.168.100.53",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-git-branch": "main",
+        "clab-git-hash": "8a254f0",
+        "clab-mgmt-net-bridge": "br-28f82f4028ad",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/arenredd/netoracle/clab-netoracle-sdwan/branch1-host",
+        "clab-node-longname": "clab-netoracle-sdwan-branch1-host",
+        "clab-node-name": "branch1-host",
+        "clab-node-type": "",
+        "clab-owner": "arenredd",
+        "clab-topo-file": "/home/arenredd/netoracle/topology.clab.yml",
+        "containerlab": "netoracle-sdwan"
+      },
+      "port-bindings": [
+      ]
+    },
+    "branch2-ce1": {
+      "index": "2",
+      "shortname": "branch2-ce1",
+      "longname": "clab-netoracle-sdwan-branch2-ce1",
+      "fqdn": "branch2-ce1.netoracle-sdwan.io",
+      "group": "",
+      "labdir": "/home/arenredd/netoracle/clab-netoracle-sdwan/branch2-ce1",
+      "kind": "linux",
+      "image": "netoracle/ce-ipsec:9.1",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "192.168.100.34",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-git-branch": "main",
+        "clab-git-hash": "8a254f0",
+        "clab-mgmt-net-bridge": "br-28f82f4028ad",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/arenredd/netoracle/clab-netoracle-sdwan/branch2-ce1",
+        "clab-node-longname": "clab-netoracle-sdwan-branch2-ce1",
+        "clab-node-name": "branch2-ce1",
+        "clab-node-type": "",
+        "clab-owner": "arenredd",
+        "clab-topo-file": "/home/arenredd/netoracle/topology.clab.yml",
+        "containerlab": "netoracle-sdwan"
+      },
+      "port-bindings": [
+      ]
+    },
+    "branch2-host": {
+      "index": "3",
+      "shortname": "branch2-host",
+      "longname": "clab-netoracle-sdwan-branch2-host",
+      "fqdn": "branch2-host.netoracle-sdwan.io",
+      "group": "",
+      "labdir": "/home/arenredd/netoracle/clab-netoracle-sdwan/branch2-host",
+      "kind": "linux",
+      "image": "netoracle/host:9.1",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "192.168.100.54",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-git-branch": "main",
+        "clab-git-hash": "8a254f0",
+        "clab-mgmt-net-bridge": "br-28f82f4028ad",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/arenredd/netoracle/clab-netoracle-sdwan/branch2-host",
+        "clab-node-longname": "clab-netoracle-sdwan-branch2-host",
+        "clab-node-name": "branch2-host",
+        "clab-node-type": "",
+        "clab-owner": "arenredd",
+        "clab-topo-file": "/home/arenredd/netoracle/topology.clab.yml",
+        "containerlab": "netoracle-sdwan"
+      },
+      "port-bindings": [
+      ]
+    },
+    "branch3-ce1": {
+      "index": "4",
+      "shortname": "branch3-ce1",
+      "longname": "clab-netoracle-sdwan-branch3-ce1",
+      "fqdn": "branch3-ce1.netoracle-sdwan.io",
+      "group": "",
+      "labdir": "/home/arenredd/netoracle/clab-netoracle-sdwan/branch3-ce1",
+      "kind": "linux",
+      "image": "netoracle/ce-ipsec:9.1",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "192.168.100.35",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-git-branch": "main",
+        "clab-git-hash": "8a254f0",
+        "clab-mgmt-net-bridge": "br-28f82f4028ad",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/arenredd/netoracle/clab-netoracle-sdwan/branch3-ce1",
+        "clab-node-longname": "clab-netoracle-sdwan-branch3-ce1",
+        "clab-node-name": "branch3-ce1",
+        "clab-node-type": "",
+        "clab-owner": "arenredd",
+        "clab-topo-file": "/home/arenredd/netoracle/topology.clab.yml",
+        "containerlab": "netoracle-sdwan"
+      },
+      "port-bindings": [
+      ]
+    },
+    "branch3-host": {
+      "index": "5",
+      "shortname": "branch3-host",
+      "longname": "clab-netoracle-sdwan-branch3-host",
+      "fqdn": "branch3-host.netoracle-sdwan.io",
+      "group": "",
+      "labdir": "/home/arenredd/netoracle/clab-netoracle-sdwan/branch3-host",
+      "kind": "linux",
+      "image": "netoracle/host:9.1",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "192.168.100.55",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-git-branch": "main",
+        "clab-git-hash": "8a254f0",
+        "clab-mgmt-net-bridge": "br-28f82f4028ad",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/arenredd/netoracle/clab-netoracle-sdwan/branch3-host",
+        "clab-node-longname": "clab-netoracle-sdwan-branch3-host",
+        "clab-node-name": "branch3-host",
+        "clab-node-type": "",
+        "clab-owner": "arenredd",
+        "clab-topo-file": "/home/arenredd/netoracle/topology.clab.yml",
+        "containerlab": "netoracle-sdwan"
+      },
+      "port-bindings": [
+      ]
+    },
+    "branch4-ce1": {
+      "index": "6",
+      "shortname": "branch4-ce1",
+      "longname": "clab-netoracle-sdwan-branch4-ce1",
+      "fqdn": "branch4-ce1.netoracle-sdwan.io",
+      "group": "",
+      "labdir": "/home/arenredd/netoracle/clab-netoracle-sdwan/branch4-ce1",
+      "kind": "linux",
+      "image": "netoracle/ce-ipsec:9.1",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "192.168.100.36",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-git-branch": "main",
+        "clab-git-hash": "8a254f0",
+        "clab-mgmt-net-bridge": "br-28f82f4028ad",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/arenredd/netoracle/clab-netoracle-sdwan/branch4-ce1",
+        "clab-node-longname": "clab-netoracle-sdwan-branch4-ce1",
+        "clab-node-name": "branch4-ce1",
+        "clab-node-type": "",
+        "clab-owner": "arenredd",
+        "clab-topo-file": "/home/arenredd/netoracle/topology.clab.yml",
+        "containerlab": "netoracle-sdwan"
+      },
+      "port-bindings": [
+      ]
+    },
+    "branch4-host": {
+      "index": "7",
+      "shortname": "branch4-host",
+      "longname": "clab-netoracle-sdwan-branch4-host",
+      "fqdn": "branch4-host.netoracle-sdwan.io",
+      "group": "",
+      "labdir": "/home/arenredd/netoracle/clab-netoracle-sdwan/branch4-host",
+      "kind": "linux",
+      "image": "netoracle/host:9.1",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "192.168.100.56",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-git-branch": "main",
+        "clab-git-hash": "8a254f0",
+        "clab-mgmt-net-bridge": "br-28f82f4028ad",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/arenredd/netoracle/clab-netoracle-sdwan/branch4-host",
+        "clab-node-longname": "clab-netoracle-sdwan-branch4-host",
+        "clab-node-name": "branch4-host",
+        "clab-node-type": "",
+        "clab-owner": "arenredd",
+        "clab-topo-file": "/home/arenredd/netoracle/topology.clab.yml",
+        "containerlab": "netoracle-sdwan"
+      },
+      "port-bindings": [
+      ]
+    },
+    "branch5-ce1": {
+      "index": "8",
+      "shortname": "branch5-ce1",
+      "longname": "clab-netoracle-sdwan-branch5-ce1",
+      "fqdn": "branch5-ce1.netoracle-sdwan.io",
+      "group": "",
+      "labdir": "/home/arenredd/netoracle/clab-netoracle-sdwan/branch5-ce1",
+      "kind": "linux",
+      "image": "netoracle/ce-ipsec:9.1",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "192.168.100.37",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-git-branch": "main",
+        "clab-git-hash": "8a254f0",
+        "clab-mgmt-net-bridge": "br-28f82f4028ad",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/arenredd/netoracle/clab-netoracle-sdwan/branch5-ce1",
+        "clab-node-longname": "clab-netoracle-sdwan-branch5-ce1",
+        "clab-node-name": "branch5-ce1",
+        "clab-node-type": "",
+        "clab-owner": "arenredd",
+        "clab-topo-file": "/home/arenredd/netoracle/topology.clab.yml",
+        "containerlab": "netoracle-sdwan"
+      },
+      "port-bindings": [
+      ]
+    },
+    "branch5-host": {
+      "index": "9",
+      "shortname": "branch5-host",
+      "longname": "clab-netoracle-sdwan-branch5-host",
+      "fqdn": "branch5-host.netoracle-sdwan.io",
+      "group": "",
+      "labdir": "/home/arenredd/netoracle/clab-netoracle-sdwan/branch5-host",
+      "kind": "linux",
+      "image": "netoracle/host:9.1",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "192.168.100.57",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-git-branch": "main",
+        "clab-git-hash": "8a254f0",
+        "clab-mgmt-net-bridge": "br-28f82f4028ad",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/arenredd/netoracle/clab-netoracle-sdwan/branch5-host",
+        "clab-node-longname": "clab-netoracle-sdwan-branch5-host",
+        "clab-node-name": "branch5-host",
+        "clab-node-type": "",
+        "clab-owner": "arenredd",
+        "clab-topo-file": "/home/arenredd/netoracle/topology.clab.yml",
+        "containerlab": "netoracle-sdwan"
+      },
+      "port-bindings": [
+      ]
+    },
+    "branch6-ce1": {
+      "index": "10",
+      "shortname": "branch6-ce1",
+      "longname": "clab-netoracle-sdwan-branch6-ce1",
+      "fqdn": "branch6-ce1.netoracle-sdwan.io",
+      "group": "",
+      "labdir": "/home/arenredd/netoracle/clab-netoracle-sdwan/branch6-ce1",
+      "kind": "linux",
+      "image": "netoracle/ce-ipsec:9.1",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "192.168.100.38",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-git-branch": "main",
+        "clab-git-hash": "8a254f0",
+        "clab-mgmt-net-bridge": "br-28f82f4028ad",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/arenredd/netoracle/clab-netoracle-sdwan/branch6-ce1",
+        "clab-node-longname": "clab-netoracle-sdwan-branch6-ce1",
+        "clab-node-name": "branch6-ce1",
+        "clab-node-type": "",
+        "clab-owner": "arenredd",
+        "clab-topo-file": "/home/arenredd/netoracle/topology.clab.yml",
+        "containerlab": "netoracle-sdwan"
+      },
+      "port-bindings": [
+      ]
+    },
+    "branch6-host": {
+      "index": "11",
+      "shortname": "branch6-host",
+      "longname": "clab-netoracle-sdwan-branch6-host",
+      "fqdn": "branch6-host.netoracle-sdwan.io",
+      "group": "",
+      "labdir": "/home/arenredd/netoracle/clab-netoracle-sdwan/branch6-host",
+      "kind": "linux",
+      "image": "netoracle/host:9.1",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "192.168.100.58",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-git-branch": "main",
+        "clab-git-hash": "8a254f0",
+        "clab-mgmt-net-bridge": "br-28f82f4028ad",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/arenredd/netoracle/clab-netoracle-sdwan/branch6-host",
+        "clab-node-longname": "clab-netoracle-sdwan-branch6-host",
+        "clab-node-name": "branch6-host",
+        "clab-node-type": "",
+        "clab-owner": "arenredd",
+        "clab-topo-file": "/home/arenredd/netoracle/topology.clab.yml",
+        "containerlab": "netoracle-sdwan"
+      },
+      "port-bindings": [
+      ]
+    },
+    "dc1-ce1": {
+      "index": "12",
+      "shortname": "dc1-ce1",
+      "longname": "clab-netoracle-sdwan-dc1-ce1",
+      "fqdn": "dc1-ce1.netoracle-sdwan.io",
+      "group": "",
+      "labdir": "/home/arenredd/netoracle/clab-netoracle-sdwan/dc1-ce1",
+      "kind": "linux",
+      "image": "netoracle/ce-ipsec:9.1",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "192.168.100.30",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-git-branch": "main",
+        "clab-git-hash": "8a254f0",
+        "clab-mgmt-net-bridge": "br-28f82f4028ad",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/arenredd/netoracle/clab-netoracle-sdwan/dc1-ce1",
+        "clab-node-longname": "clab-netoracle-sdwan-dc1-ce1",
+        "clab-node-name": "dc1-ce1",
+        "clab-node-type": "",
+        "clab-owner": "arenredd",
+        "clab-topo-file": "/home/arenredd/netoracle/topology.clab.yml",
+        "containerlab": "netoracle-sdwan"
+      },
+      "port-bindings": [
+      ]
+    },
+    "dc1-host": {
+      "index": "13",
+      "shortname": "dc1-host",
+      "longname": "clab-netoracle-sdwan-dc1-host",
+      "fqdn": "dc1-host.netoracle-sdwan.io",
+      "group": "",
+      "labdir": "/home/arenredd/netoracle/clab-netoracle-sdwan/dc1-host",
+      "kind": "linux",
+      "image": "netoracle/host:9.1",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "192.168.100.50",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-git-branch": "main",
+        "clab-git-hash": "8a254f0",
+        "clab-mgmt-net-bridge": "br-28f82f4028ad",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/arenredd/netoracle/clab-netoracle-sdwan/dc1-host",
+        "clab-node-longname": "clab-netoracle-sdwan-dc1-host",
+        "clab-node-name": "dc1-host",
+        "clab-node-type": "",
+        "clab-owner": "arenredd",
+        "clab-topo-file": "/home/arenredd/netoracle/topology.clab.yml",
+        "containerlab": "netoracle-sdwan"
+      },
+      "port-bindings": [
+      ]
+    },
+    "dc1-p1": {
+      "index": "14",
+      "shortname": "dc1-p1",
+      "longname": "clab-netoracle-sdwan-dc1-p1",
+      "fqdn": "dc1-p1.netoracle-sdwan.io",
+      "group": "",
+      "labdir": "/home/arenredd/netoracle/clab-netoracle-sdwan/dc1-p1",
+      "kind": "linux",
+      "image": "quay.io/frrouting/frr:9.1.0",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "192.168.100.10",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-git-branch": "main",
+        "clab-git-hash": "8a254f0",
+        "clab-mgmt-net-bridge": "br-28f82f4028ad",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/arenredd/netoracle/clab-netoracle-sdwan/dc1-p1",
+        "clab-node-longname": "clab-netoracle-sdwan-dc1-p1",
+        "clab-node-name": "dc1-p1",
+        "clab-node-type": "",
+        "clab-owner": "arenredd",
+        "clab-topo-file": "/home/arenredd/netoracle/topology.clab.yml",
+        "containerlab": "netoracle-sdwan"
+      },
+      "port-bindings": [
+      ]
+    },
+    "dc1-pe1": {
+      "index": "15",
+      "shortname": "dc1-pe1",
+      "longname": "clab-netoracle-sdwan-dc1-pe1",
+      "fqdn": "dc1-pe1.netoracle-sdwan.io",
+      "group": "",
+      "labdir": "/home/arenredd/netoracle/clab-netoracle-sdwan/dc1-pe1",
+      "kind": "linux",
+      "image": "quay.io/frrouting/frr:9.1.0",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "192.168.100.20",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-git-branch": "main",
+        "clab-git-hash": "8a254f0",
+        "clab-mgmt-net-bridge": "br-28f82f4028ad",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/arenredd/netoracle/clab-netoracle-sdwan/dc1-pe1",
+        "clab-node-longname": "clab-netoracle-sdwan-dc1-pe1",
+        "clab-node-name": "dc1-pe1",
+        "clab-node-type": "",
+        "clab-owner": "arenredd",
+        "clab-topo-file": "/home/arenredd/netoracle/topology.clab.yml",
+        "containerlab": "netoracle-sdwan"
+      },
+      "port-bindings": [
+      ]
+    },
+    "dc2-ce1": {
+      "index": "16",
+      "shortname": "dc2-ce1",
+      "longname": "clab-netoracle-sdwan-dc2-ce1",
+      "fqdn": "dc2-ce1.netoracle-sdwan.io",
+      "group": "",
+      "labdir": "/home/arenredd/netoracle/clab-netoracle-sdwan/dc2-ce1",
+      "kind": "linux",
+      "image": "netoracle/ce-ipsec:9.1",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "192.168.100.31",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-git-branch": "main",
+        "clab-git-hash": "8a254f0",
+        "clab-mgmt-net-bridge": "br-28f82f4028ad",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/arenredd/netoracle/clab-netoracle-sdwan/dc2-ce1",
+        "clab-node-longname": "clab-netoracle-sdwan-dc2-ce1",
+        "clab-node-name": "dc2-ce1",
+        "clab-node-type": "",
+        "clab-owner": "arenredd",
+        "clab-topo-file": "/home/arenredd/netoracle/topology.clab.yml",
+        "containerlab": "netoracle-sdwan"
+      },
+      "port-bindings": [
+      ]
+    },
+    "dc2-host": {
+      "index": "17",
+      "shortname": "dc2-host",
+      "longname": "clab-netoracle-sdwan-dc2-host",
+      "fqdn": "dc2-host.netoracle-sdwan.io",
+      "group": "",
+      "labdir": "/home/arenredd/netoracle/clab-netoracle-sdwan/dc2-host",
+      "kind": "linux",
+      "image": "netoracle/host:9.1",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "192.168.100.51",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-git-branch": "main",
+        "clab-git-hash": "8a254f0",
+        "clab-mgmt-net-bridge": "br-28f82f4028ad",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/arenredd/netoracle/clab-netoracle-sdwan/dc2-host",
+        "clab-node-longname": "clab-netoracle-sdwan-dc2-host",
+        "clab-node-name": "dc2-host",
+        "clab-node-type": "",
+        "clab-owner": "arenredd",
+        "clab-topo-file": "/home/arenredd/netoracle/topology.clab.yml",
+        "containerlab": "netoracle-sdwan"
+      },
+      "port-bindings": [
+      ]
+    },
+    "dc2-p1": {
+      "index": "18",
+      "shortname": "dc2-p1",
+      "longname": "clab-netoracle-sdwan-dc2-p1",
+      "fqdn": "dc2-p1.netoracle-sdwan.io",
+      "group": "",
+      "labdir": "/home/arenredd/netoracle/clab-netoracle-sdwan/dc2-p1",
+      "kind": "linux",
+      "image": "quay.io/frrouting/frr:9.1.0",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "192.168.100.11",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-git-branch": "main",
+        "clab-git-hash": "8a254f0",
+        "clab-mgmt-net-bridge": "br-28f82f4028ad",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/arenredd/netoracle/clab-netoracle-sdwan/dc2-p1",
+        "clab-node-longname": "clab-netoracle-sdwan-dc2-p1",
+        "clab-node-name": "dc2-p1",
+        "clab-node-type": "",
+        "clab-owner": "arenredd",
+        "clab-topo-file": "/home/arenredd/netoracle/topology.clab.yml",
+        "containerlab": "netoracle-sdwan"
+      },
+      "port-bindings": [
+      ]
+    },
+    "dc2-pe1": {
+      "index": "19",
+      "shortname": "dc2-pe1",
+      "longname": "clab-netoracle-sdwan-dc2-pe1",
+      "fqdn": "dc2-pe1.netoracle-sdwan.io",
+      "group": "",
+      "labdir": "/home/arenredd/netoracle/clab-netoracle-sdwan/dc2-pe1",
+      "kind": "linux",
+      "image": "quay.io/frrouting/frr:9.1.0",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "192.168.100.21",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-git-branch": "main",
+        "clab-git-hash": "8a254f0",
+        "clab-mgmt-net-bridge": "br-28f82f4028ad",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/arenredd/netoracle/clab-netoracle-sdwan/dc2-pe1",
+        "clab-node-longname": "clab-netoracle-sdwan-dc2-pe1",
+        "clab-node-name": "dc2-pe1",
+        "clab-node-type": "",
+        "clab-owner": "arenredd",
+        "clab-topo-file": "/home/arenredd/netoracle/topology.clab.yml",
+        "containerlab": "netoracle-sdwan"
+      },
+      "port-bindings": [
+      ]
+    },
+    "hub-ce1": {
+      "index": "20",
+      "shortname": "hub-ce1",
+      "longname": "clab-netoracle-sdwan-hub-ce1",
+      "fqdn": "hub-ce1.netoracle-sdwan.io",
+      "group": "",
+      "labdir": "/home/arenredd/netoracle/clab-netoracle-sdwan/hub-ce1",
+      "kind": "linux",
+      "image": "netoracle/ce-ipsec:9.1",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "192.168.100.32",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-git-branch": "main",
+        "clab-git-hash": "8a254f0",
+        "clab-mgmt-net-bridge": "br-28f82f4028ad",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/arenredd/netoracle/clab-netoracle-sdwan/hub-ce1",
+        "clab-node-longname": "clab-netoracle-sdwan-hub-ce1",
+        "clab-node-name": "hub-ce1",
+        "clab-node-type": "",
+        "clab-owner": "arenredd",
+        "clab-topo-file": "/home/arenredd/netoracle/topology.clab.yml",
+        "containerlab": "netoracle-sdwan"
+      },
+      "port-bindings": [
+      ]
+    },
+    "hub-host": {
+      "index": "21",
+      "shortname": "hub-host",
+      "longname": "clab-netoracle-sdwan-hub-host",
+      "fqdn": "hub-host.netoracle-sdwan.io",
+      "group": "",
+      "labdir": "/home/arenredd/netoracle/clab-netoracle-sdwan/hub-host",
+      "kind": "linux",
+      "image": "netoracle/host:9.1",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "192.168.100.52",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-git-branch": "main",
+        "clab-git-hash": "8a254f0",
+        "clab-mgmt-net-bridge": "br-28f82f4028ad",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/arenredd/netoracle/clab-netoracle-sdwan/hub-host",
+        "clab-node-longname": "clab-netoracle-sdwan-hub-host",
+        "clab-node-name": "hub-host",
+        "clab-node-type": "",
+        "clab-owner": "arenredd",
+        "clab-topo-file": "/home/arenredd/netoracle/topology.clab.yml",
+        "containerlab": "netoracle-sdwan"
+      },
+      "port-bindings": [
+      ]
+    },
+    "hub-p1": {
+      "index": "22",
+      "shortname": "hub-p1",
+      "longname": "clab-netoracle-sdwan-hub-p1",
+      "fqdn": "hub-p1.netoracle-sdwan.io",
+      "group": "",
+      "labdir": "/home/arenredd/netoracle/clab-netoracle-sdwan/hub-p1",
+      "kind": "linux",
+      "image": "quay.io/frrouting/frr:9.1.0",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "192.168.100.12",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-git-branch": "main",
+        "clab-git-hash": "8a254f0",
+        "clab-mgmt-net-bridge": "br-28f82f4028ad",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/arenredd/netoracle/clab-netoracle-sdwan/hub-p1",
+        "clab-node-longname": "clab-netoracle-sdwan-hub-p1",
+        "clab-node-name": "hub-p1",
+        "clab-node-type": "",
+        "clab-owner": "arenredd",
+        "clab-topo-file": "/home/arenredd/netoracle/topology.clab.yml",
+        "containerlab": "netoracle-sdwan"
+      },
+      "port-bindings": [
+      ]
+    },
+    "hub-pe1": {
+      "index": "23",
+      "shortname": "hub-pe1",
+      "longname": "clab-netoracle-sdwan-hub-pe1",
+      "fqdn": "hub-pe1.netoracle-sdwan.io",
+      "group": "",
+      "labdir": "/home/arenredd/netoracle/clab-netoracle-sdwan/hub-pe1",
+      "kind": "linux",
+      "image": "quay.io/frrouting/frr:9.1.0",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "192.168.100.22",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "",
+      "mgmt-ipv6-prefix-length": 0,
+      "mac-address": "",
+      "labels": {
+        "clab-git-branch": "main",
+        "clab-git-hash": "8a254f0",
+        "clab-mgmt-net-bridge": "br-28f82f4028ad",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/arenredd/netoracle/clab-netoracle-sdwan/hub-pe1",
+        "clab-node-longname": "clab-netoracle-sdwan-hub-pe1",
+        "clab-node-name": "hub-pe1",
+        "clab-node-type": "",
+        "clab-owner": "arenredd",
+        "clab-topo-file": "/home/arenredd/netoracle/topology.clab.yml",
+        "containerlab": "netoracle-sdwan"
+      },
+      "port-bindings": [
+      ]
+    }
+  },
+  "links": [
+    {
+      "endpoints": {
+        "a": {
+          "node": "dc1-p1",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:b0:5b:be",
+          "peer": "z"
+        },
+        "z": {
+          "node": "dc2-p1",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:b1:17:3a",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "dc1-p1",
+          "interface": "eth2",
+          "mac": "aa:c1:ab:5b:a4:10",
+          "peer": "z"
+        },
+        "z": {
+          "node": "hub-p1",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:81:9a:1d",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "dc2-p1",
+          "interface": "eth2",
+          "mac": "aa:c1:ab:5d:78:a1",
+          "peer": "z"
+        },
+        "z": {
+          "node": "hub-p1",
+          "interface": "eth2",
+          "mac": "aa:c1:ab:b1:8b:d9",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "dc1-pe1",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:08:95:b1",
+          "peer": "z"
+        },
+        "z": {
+          "node": "dc1-p1",
+          "interface": "eth3",
+          "mac": "aa:c1:ab:4e:e0:69",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "dc2-pe1",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:e1:dd:56",
+          "peer": "z"
+        },
+        "z": {
+          "node": "dc2-p1",
+          "interface": "eth3",
+          "mac": "aa:c1:ab:53:d9:55",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "hub-pe1",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:71:f8:59",
+          "peer": "z"
+        },
+        "z": {
+          "node": "hub-p1",
+          "interface": "eth3",
+          "mac": "aa:c1:ab:9d:aa:3c",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "dc1-ce1",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:60:bc:4b",
+          "peer": "z"
+        },
+        "z": {
+          "node": "dc1-pe1",
+          "interface": "eth2",
+          "mac": "aa:c1:ab:52:9d:6b",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "dc2-ce1",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:1e:9a:1f",
+          "peer": "z"
+        },
+        "z": {
+          "node": "dc2-pe1",
+          "interface": "eth2",
+          "mac": "aa:c1:ab:08:1f:c6",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "hub-ce1",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:23:a7:23",
+          "peer": "z"
+        },
+        "z": {
+          "node": "hub-pe1",
+          "interface": "eth2",
+          "mac": "aa:c1:ab:a8:01:d9",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "branch1-ce1",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:f9:a6:5e",
+          "peer": "z"
+        },
+        "z": {
+          "node": "hub-pe1",
+          "interface": "eth3",
+          "mac": "aa:c1:ab:c3:8c:6f",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "branch2-ce1",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:94:38:2a",
+          "peer": "z"
+        },
+        "z": {
+          "node": "hub-pe1",
+          "interface": "eth4",
+          "mac": "aa:c1:ab:99:0e:a3",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "branch3-ce1",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:c8:7d:13",
+          "peer": "z"
+        },
+        "z": {
+          "node": "hub-pe1",
+          "interface": "eth5",
+          "mac": "aa:c1:ab:e8:3a:31",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "branch4-ce1",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:a2:d3:ee",
+          "peer": "z"
+        },
+        "z": {
+          "node": "dc1-pe1",
+          "interface": "eth3",
+          "mac": "aa:c1:ab:b0:b4:3f",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "branch5-ce1",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:a5:f9:6f",
+          "peer": "z"
+        },
+        "z": {
+          "node": "dc2-pe1",
+          "interface": "eth3",
+          "mac": "aa:c1:ab:7e:7e:d4",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "branch6-ce1",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:88:44:23",
+          "peer": "z"
+        },
+        "z": {
+          "node": "hub-pe1",
+          "interface": "eth6",
+          "mac": "aa:c1:ab:7d:65:e5",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "dc1-host",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:87:fe:dc",
+          "peer": "z"
+        },
+        "z": {
+          "node": "dc1-ce1",
+          "interface": "eth2",
+          "mac": "aa:c1:ab:28:87:78",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "dc2-host",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:38:6e:33",
+          "peer": "z"
+        },
+        "z": {
+          "node": "dc2-ce1",
+          "interface": "eth2",
+          "mac": "aa:c1:ab:a3:5e:2f",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "hub-host",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:b5:59:e4",
+          "peer": "z"
+        },
+        "z": {
+          "node": "hub-ce1",
+          "interface": "eth2",
+          "mac": "aa:c1:ab:2d:b2:78",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "branch1-host",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:f0:ef:16",
+          "peer": "z"
+        },
+        "z": {
+          "node": "branch1-ce1",
+          "interface": "eth2",
+          "mac": "aa:c1:ab:07:ff:6f",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "branch2-host",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:b7:8d:9e",
+          "peer": "z"
+        },
+        "z": {
+          "node": "branch2-ce1",
+          "interface": "eth2",
+          "mac": "aa:c1:ab:85:48:dd",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "branch3-host",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:51:49:93",
+          "peer": "z"
+        },
+        "z": {
+          "node": "branch3-ce1",
+          "interface": "eth2",
+          "mac": "aa:c1:ab:7f:f5:bc",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "branch4-host",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:d4:aa:52",
+          "peer": "z"
+        },
+        "z": {
+          "node": "branch4-ce1",
+          "interface": "eth2",
+          "mac": "aa:c1:ab:57:f3:53",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "branch5-host",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:89:af:10",
+          "peer": "z"
+        },
+        "z": {
+          "node": "branch5-ce1",
+          "interface": "eth2",
+          "mac": "aa:c1:ab:9d:df:bb",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "branch6-host",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:f7:a8:62",
+          "peer": "z"
+        },
+        "z": {
+          "node": "branch6-ce1",
+          "interface": "eth2",
+          "mac": "aa:c1:ab:31:f8:cf",
+          "peer": "a"
+        }
+      }
+    }
+  ]
+}

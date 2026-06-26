@@ -1,0 +1,57 @@
+all:
+  vars:
+    # The generated inventory is assumed to be used from the clab host.
+    # Hence no http proxy should be used. Therefore we make sure the http
+    # module does not attempt using any global http proxy.
+    ansible_httpapi_use_proxy: false
+  children:
+    linux:
+      hosts:
+        clab-netoracle-sdwan-branch1-ce1:
+          ansible_host: 192.168.100.33
+        clab-netoracle-sdwan-branch1-host:
+          ansible_host: 192.168.100.53
+        clab-netoracle-sdwan-branch2-ce1:
+          ansible_host: 192.168.100.34
+        clab-netoracle-sdwan-branch2-host:
+          ansible_host: 192.168.100.54
+        clab-netoracle-sdwan-branch3-ce1:
+          ansible_host: 192.168.100.35
+        clab-netoracle-sdwan-branch3-host:
+          ansible_host: 192.168.100.55
+        clab-netoracle-sdwan-branch4-ce1:
+          ansible_host: 192.168.100.36
+        clab-netoracle-sdwan-branch4-host:
+          ansible_host: 192.168.100.56
+        clab-netoracle-sdwan-branch5-ce1:
+          ansible_host: 192.168.100.37
+        clab-netoracle-sdwan-branch5-host:
+          ansible_host: 192.168.100.57
+        clab-netoracle-sdwan-branch6-ce1:
+          ansible_host: 192.168.100.38
+        clab-netoracle-sdwan-branch6-host:
+          ansible_host: 192.168.100.58
+        clab-netoracle-sdwan-dc1-ce1:
+          ansible_host: 192.168.100.30
+        clab-netoracle-sdwan-dc1-host:
+          ansible_host: 192.168.100.50
+        clab-netoracle-sdwan-dc1-p1:
+          ansible_host: 192.168.100.10
+        clab-netoracle-sdwan-dc1-pe1:
+          ansible_host: 192.168.100.20
+        clab-netoracle-sdwan-dc2-ce1:
+          ansible_host: 192.168.100.31
+        clab-netoracle-sdwan-dc2-host:
+          ansible_host: 192.168.100.51
+        clab-netoracle-sdwan-dc2-p1:
+          ansible_host: 192.168.100.11
+        clab-netoracle-sdwan-dc2-pe1:
+          ansible_host: 192.168.100.21
+        clab-netoracle-sdwan-hub-ce1:
+          ansible_host: 192.168.100.32
+        clab-netoracle-sdwan-hub-host:
+          ansible_host: 192.168.100.52
+        clab-netoracle-sdwan-hub-p1:
+          ansible_host: 192.168.100.12
+        clab-netoracle-sdwan-hub-pe1:
+          ansible_host: 192.168.100.22

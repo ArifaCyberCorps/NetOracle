@@ -1,4 +1,4 @@
-FROM frrouting/frr:9.1
+FROM quay.io/frrouting/frr:9.1.0
 
 # Pre-install strongSwan for IPsec VTI overlay tunnels
 # This avoids runtime network calls in air-gapped deployments

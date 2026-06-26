@@ -1,0 +1,121 @@
+---
+branch1-ce1:
+    username: 
+    password: 
+    platform: linux
+    hostname: 192.168.100.33
+branch1-host:
+    username: 
+    password: 
+    platform: linux
+    hostname: 192.168.100.53
+branch2-ce1:
+    username: 
+    password: 
+    platform: linux
+    hostname: 192.168.100.34
+branch2-host:
+    username: 
+    password: 
+    platform: linux
+    hostname: 192.168.100.54
+branch3-ce1:
+    username: 
+    password: 
+    platform: linux
+    hostname: 192.168.100.35
+branch3-host:
+    username: 
+    password: 
+    platform: linux
+    hostname: 192.168.100.55
+branch4-ce1:
+    username: 
+    password: 
+    platform: linux
+    hostname: 192.168.100.36
+branch4-host:
+    username: 
+    password: 
+    platform: linux
+    hostname: 192.168.100.56
+branch5-ce1:
+    username: 
+    password: 
+    platform: linux
+    hostname: 192.168.100.37
+branch5-host:
+    username: 
+    password: 
+    platform: linux
+    hostname: 192.168.100.57
+branch6-ce1:
+    username: 
+    password: 
+    platform: linux
+    hostname: 192.168.100.38
+branch6-host:
+    username: 
+    password: 
+    platform: linux
+    hostname: 192.168.100.58
+dc1-ce1:
+    username: 
+    password: 
+    platform: linux
+    hostname: 192.168.100.30
+dc1-host:
+    username: 
+    password: 
+    platform: linux
+    hostname: 192.168.100.50
+dc1-p1:
+    username: 
+    password: 
+    platform: linux
+    hostname: 192.168.100.10
+dc1-pe1:
+    username: 
+    password: 
+    platform: linux
+    hostname: 192.168.100.20
+dc2-ce1:
+    username: 
+    password: 
+    platform: linux
+    hostname: 192.168.100.31
+dc2-host:
+    username: 
+    password: 
+    platform: linux
+    hostname: 192.168.100.51
+dc2-p1:
+    username: 
+    password: 
+    platform: linux
+    hostname: 192.168.100.11
+dc2-pe1:
+    username: 
+    password: 
+    platform: linux
+    hostname: 192.168.100.21
+hub-ce1:
+    username: 
+    password: 
+    platform: linux
+    hostname: 192.168.100.32
+hub-host:
+    username: 
+    password: 
+    platform: linux
+    hostname: 192.168.100.52
+hub-p1:
+    username: 
+    password: 
+    platform: linux
+    hostname: 192.168.100.12
+hub-pe1:
+    username: 
+    password: 
+    platform: linux
+    hostname: 192.168.100.22

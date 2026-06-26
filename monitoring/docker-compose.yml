@@ -1,0 +1,97 @@
+networks:
+  clab:
+    external: true
+    name: ${CLAB_NET:-clab}
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.51.0
+    container_name: prometheus
+    networks:
+      clab:
+        ipv4_address: 192.168.100.110
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --web.console.libraries=/usr/share/prometheus/console_libraries
+      - --web.console.templates=/usr/share/prometheus/consoles
+      - --storage.tsdb.retention.time=7d
+
+  grafana:
+    image: grafana/grafana:10.4.2
+    container_name: grafana
+    networks:
+      clab:
+        ipv4_address: 192.168.100.111
+    ports:
+      - "3000:3000"
+    environment:
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: "Admin"
+      GF_SECURITY_ADMIN_PASSWORD: "admin"
+    volumes:
+      - ./grafana/datasources/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
+      - ./grafana/dashboards/dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yml
+      - ./grafana/dashboards/network_overview.json:/var/lib/grafana/dashboards/network_overview.json
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.49.1
+    container_name: cadvisor
+    privileged: true
+    networks:
+      clab:
+        ipv4_address: 192.168.100.112
+    ports:
+      - "8080:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+
+  telegraf:
+    image: telegraf:1.30
+    container_name: telegraf
+    networks:
+      clab:
+        ipv4_address: 192.168.100.113
+    ports:
+      - "9273:9273"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+
+  telemetry-collector:
+    image: netoracle/telemetry-collector:9.1
+    container_name: telemetry-collector
+    networks:
+      clab:
+        ipv4_address: 192.168.100.100
+    ports:
+      - "8000:8000"
+      - "5514:5514/udp"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ../telemetry:/app/telemetry
+      - ../telemetry_data:/app/telemetry_data
+    working_dir: /app
+    command: python3 -m telemetry.collector /app/telemetry/config.yaml
+
+  ntp-server:
+    image: netoracle/ntp:9.1
+    container_name: ntp-server
+    networks:
+      clab:
+        ipv4_address: 192.168.100.2
+    command: >
+      sh -c "
+      echo 'server 127.127.1.0 iburst' > /etc/chrony/chrony.conf &&
+      echo 'local stratum 10' >> /etc/chrony/chrony.conf &&
+      echo 'allow 192.168.100.0/24' >> /etc/chrony/chrony.conf &&
+      exec /usr/sbin/chronyd -d -f /etc/chrony/chrony.conf
+      "

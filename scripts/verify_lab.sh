@@ -52,8 +52,8 @@ for router in dc1-p1 dc2-p1 hub-p1; do
 done
 
 echo ""
-echo "--- Monitoring Stack ---"
-for mon in prometheus grafana cadvisor telegraf telemetry-collector; do
+echo "--- Monitoring Stack (docker-compose) ---"
+for mon in prometheus grafana cadvisor telegraf telemetry-collector ntp-server; do
     docker ps --format '{{.Names}}' | grep -q "$mon"
     check "Container $mon is running"
 done

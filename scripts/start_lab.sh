@@ -8,21 +8,22 @@ echo "=== NetOracle Lab - Start ==="
 echo ""
 
 # Deploy containerlab topology
-echo "[1/3] Deploying containerlab topology..."
+echo "[1/5] Deploying containerlab topology..."
 sudo containerlab deploy -t topology.clab.yml --reconfigure
 
-echo "[2/3] Waiting for routing convergence (30s)..."
+echo "[2/5] Waiting for routing convergence (30s)..."
 sleep 30
 
 # Apply QoS policies
-echo "[3/3] Applying QoS policies..."
+echo "[3/5] Applying QoS policies..."
 bash scripts/apply_qos.sh
 
-# Start telemetry collection
-echo "[4/5] Starting telemetry collector..."
-bash scripts/start_telemetry.sh
+# Configure syslog forwarding from FRR containers to telemetry-collector
+echo "[4/5] Configuring syslog forwarding..."
+mkdir -p telemetry_data
+bash scripts/enable_syslog.sh
 
-echo "[5/5] Monitoring stack status:"
+echo "[5/5] Starting monitoring stack (docker-compose)..."
 bash scripts/start_monitoring.sh
 
 echo ""
@@ -50,7 +51,7 @@ echo "  cAdvisor:           http://192.168.100.112:8080"
 echo "  Telemetry Metrics:  http://192.168.100.100:8000/metrics"
 echo ""
 echo "Telemetry CSV:"
-echo "  collector PID:      cat /tmp/telemetry_collector.pid"
+echo "  collector logs:     docker logs telemetry-collector"
 echo "  tail interfaces:    tail -f telemetry_data/interface_counters.csv"
 echo "  tail BGP:           tail -f telemetry_data/bgp_events.csv"
 echo ""

@@ -31,19 +31,28 @@ echo "[3/6] Creating directory structure..."
 mkdir -p ground_truth logs
 
 # Pre-pull FRR image
-echo "[4/7] Pre-pulling FRR container image..."
-docker pull frrouting/frr:9.1
-
-# Pre-pull Ubuntu image
-echo "[5/7] Pre-pulling Ubuntu image..."
-docker pull ubuntu:22.04
+echo "[4/8] Pre-pulling FRR container image..."
+docker pull quay.io/frrouting/frr:9.1.0
 
 # Build custom CE image with strongSwan pre-installed (IPsec VTI overlay)
-echo "[6/7] Building CE image (FRR + strongSwan)..."
+echo "[5/8] Building CE image (FRR + strongSwan)..."
 docker build -t netoracle/ce-ipsec:9.1 -f docker/Dockerfile.ce .
 
+# Build host image with traffic generators baked in
+echo "[6/8] Building host image (iperf3, mgen, scapy, etc.)..."
+docker build -t netoracle/host:9.1 -f docker/Dockerfile.host .
+
+# Build telemetry-collector image
+echo "[7/8] Building telemetry-collector image..."
+docker build -t netoracle/telemetry-collector:9.1 -f docker/Dockerfile.telemetry-collector .
+
+# Build NTP server image
+echo "[8/8] Building NTP server image..."
+docker build -t netoracle/ntp:9.1 -f docker/Dockerfile.ntp .
+
 # Verify lab file exists
-echo "[7/7] Verifying topology file..."
+echo ""
+echo "Verifying topology file..."
 if [ -f "topology.clab.yml" ]; then
     echo "  Found: topology.clab.yml"
 else
@@ -55,8 +64,7 @@ echo ""
 echo "=== Setup complete ==="
 echo ""
 echo "Next steps:"
-echo "  1. Start the lab:   sudo containerlab deploy -t topology.clab.yml"
-echo "  2. Apply QoS:       bash scripts/apply_qos.sh"
-echo "  3. Verify:          bash scripts/verify_lab.sh"
-echo "  4. Run traffic:     python3 -m traffic.scheduler baseline 3600"
-echo "  5. Run scenario:    python3 -m fault_injection.scenario_runner bgp_flap_cascade"
+echo "  1. Start the lab:   bash scripts/start_lab.sh"
+echo "  2. Verify:          bash scripts/verify_lab.sh"
+echo "  3. Run traffic:     python3 -m traffic.scheduler baseline 3600"
+echo "  4. Run scenario:    python3 -m fault_injection.scenario_runner bgp_flap_cascade"

@@ -1,52 +1,49 @@
 #!/bin/bash
-# Verify and log the monitoring stack status
+# Start the monitoring stack (Prometheus, Grafana, cAdvisor, Telegraf, Telemetry Collector, NTP)
+# via docker-compose on the containerlab management network.
+# Must be run AFTER containerlab deploys the topology so the "clab" network exists.
 
-echo "=== Monitoring Stack ==="
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$SCRIPT_DIR"
+
+echo "=== Starting Monitoring Stack (docker-compose) ==="
 echo ""
 
-GRAFANA_URL="http://localhost:3000"
-
-# Check Prometheus
-if docker ps --format '{{.Names}}' | grep -q "prometheus"; then
-    PROM_IP=$(docker inspect prometheus -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' 2>/dev/null)
-    echo "  Prometheus: running (management: 192.168.100.110, internal: $PROM_IP)"
-    echo "    Targets: http://192.168.100.110:9090/targets"
+# Detect the containerlab management network name and export it
+# so docker-compose picks it up via ${CLAB_NET:-clab} substitution
+CLAB_NET="clab"
+if docker network inspect "$CLAB_NET" &>/dev/null; then
+    echo "  Using network: $CLAB_NET"
+elif docker network inspect "clab-netoracle-sdwan" &>/dev/null; then
+    CLAB_NET="clab-netoracle-sdwan"
+    echo "  Using network: $CLAB_NET"
 else
-    echo "  Prometheus: NOT RUNNING"
+    echo "  WARNING: clab network not found. Attempting to detect..."
+    CLAB_NET=$(docker network ls --filter name=clab --format "{{.Name}}" | head -1)
+    if [ -n "$CLAB_NET" ]; then
+        echo "  Detected network: $CLAB_NET"
+    else
+        echo "  ERROR: No clab network found. Deploy the topology first."
+        exit 1
+    fi
 fi
 
-# Check Grafana
-if docker ps --format '{{.Names}}' | grep -q "grafana"; then
-    GRAF_IP=$(docker inspect grafana -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' 2>/dev/null)
-    echo "  Grafana:    running (management: 192.168.100.111, internal: $GRAF_IP)"
-    echo "    URL: http://192.168.100.111:3000 (admin/admin)"
-else
-    echo "  Grafana:    NOT RUNNING"
-fi
+export CLAB_NET
 
-# Check cAdvisor
-if docker ps --format '{{.Names}}' | grep -q "cadvisor"; then
-    echo "  cAdvisor:   running (management: 192.168.100.112)"
-    echo "    URL: http://192.168.100.112:8080"
-else
-    echo "  cAdvisor:   NOT RUNNING"
-fi
+echo "  Deploying: CLAB_NET=$CLAB_NET docker compose -f monitoring/docker-compose.yml up -d"
+docker compose -f monitoring/docker-compose.yml up -d
 
-# Check Telegraf
-if docker ps --format '{{.Names}}' | grep -q "telegraf"; then
-    echo "  Telegraf:   running (management: 192.168.100.113)"
-    echo "    Metrics: http://192.168.100.113:9273/metrics"
-else
-    echo "  Telegraf:   NOT RUNNING"
-fi
-
-# Check Telemetry Collector
-if docker ps --format '{{.Names}}' | grep -q "telemetry-collector"; then
-    echo "  Telemetry:  running (management: 192.168.100.100)"
-    echo "    Metrics: http://192.168.100.100:8000/metrics"
-else
-    echo "  Telemetry:  NOT RUNNING"
-fi
+echo ""
+echo "=== Monitoring Stack Status ==="
+for svc in prometheus grafana cadvisor telegraf telemetry-collector ntp-server; do
+    if docker ps --format '{{.Names}}' | grep -q "$svc"; then
+        echo "  [UP] $svc"
+    else
+        echo "  [DOWN] $svc"
+    fi
+done
 
 echo ""
 echo "=== Quick Links ==="
