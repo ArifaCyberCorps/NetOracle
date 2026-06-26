@@ -1,0 +1,219 @@
+# Fault Injection Scenarios
+# Each scenario defines a sequence of fault events to inject
+# Scheduler runs traffic profiles concurrently with fault injection
+
+scenarios:
+  progressive_congestion:
+    description: >
+      Linearly ramp traffic on a target link until congestion develops,
+      then release. Captures the precursor window telemetry.
+    faults:
+      - type: traffic_ramp
+        target: branch1_to_hub
+        params:
+          profile: bulk_transfer
+          ramp_duration_sec: 180
+          peak_rate_mbps: 500
+        phase: warmup
+      - type: traffic_ramp
+        target: branch2_to_hub
+        params:
+          profile: bulk_transfer
+          ramp_duration_sec: 180
+          peak_rate_mbps: 500
+        phase: ramp_to_congestion
+      - type: traffic_ramp
+        target: branch3_to_hub
+        params:
+          profile: bulk_transfer
+          ramp_duration_sec: 120
+          peak_rate_mbps: 400
+        phase: sustained_congestion
+      - type: traffic_stop
+        target: branch1_to_hub
+        params: {}
+        phase: recovery
+
+  bgp_flap_cascade:
+    description: >
+      Sequentially reset BGP sessions on PE routers to simulate
+      a cascade of routing table churn. Tests BGP convergence
+      detection and path divergence.
+    faults:
+      - type: bgp_reset
+        target: hub-pe1
+        params:
+          vrf: VRF-CORP
+          neighbor: 10.1.0.19
+          holddown_sec: 30
+        phase: fault_active
+      - type: bgp_reset
+        target: dc1-pe1
+        params:
+          vrf: VRF-CORP
+          neighbor: 10.1.0.25
+          holddown_sec: 45
+        phase: fault_active
+      - type: bgp_reset
+        target: hub-pe1
+        params:
+          vrf: VRF-CORP
+          neighbor: 10.1.0.21
+          holddown_sec: 60
+        phase: fault_active
+      - type: bgp_reset
+        target: hub-pe1
+        params:
+          vrf: VRF-CORP
+          neighbor: 10.1.0.23
+          holddown_sec: 90
+        phase: recovery
+
+  intermittent_mpls_failure:
+    description: >
+      Simulate intermittent MPLS underlay failure by toggling
+      LDP on core links. Traffic shifts to overlay while underlay
+      recovers - classic SD-WAN divergence signal.
+    faults:
+      - type: mpls_ldp_disable
+        target: dc1-p1
+        params:
+          interface: eth2
+          duration_sec: 60
+        phase: fault_active
+      - type: interface_flap
+        target: dc2-p1
+        params:
+          interface: eth2
+          down_duration_sec: 30
+          up_duration_sec: 20
+          cycles: 3
+        phase: fault_active
+      - type: mpls_ldp_enable
+        target: dc1-p1
+        params:
+          interface: eth2
+          duration_sec: 60
+        phase: recovery
+
+  controller_policy_drift:
+    description: >
+      Simulate SD-WAN controller misconfiguration by changing
+      QoS policy on a CE device, causing DSCP reclassification.
+    faults:
+      - type: qos_change
+        target: hub-pe1
+        params:
+          interface: eth2
+          original_dscp: EF
+          new_dscp: BE
+          duration_sec: 120
+        phase: fault_active
+      - type: qos_change
+        target: dc1-pe1
+        params:
+          interface: eth2
+          original_dscp: AF41
+          new_dscp: BE
+          duration_sec: 120
+        phase: fault_active
+      - type: qos_restore
+        target: hub-pe1
+        params:
+          interface: eth2
+        phase: recovery
+
+  ipsec_sa_flap:
+    description: >
+      Flap specific IPsec SAs on hub-ce1 to simulate SD-WAN tunnel
+      instability. Each SA down/up cycle takes ~30s. Captures BGP
+      convergence over IPsec and route-reflector re-convergence.
+    faults:
+      - type: ipsec_sa_down
+        target: hub-ce1
+        params:
+          connection: vti102
+          duration_sec: 30
+        phase: fault_active
+      - type: ipsec_sa_down
+        target: hub-ce1
+        params:
+          connection: vti103
+          duration_sec: 45
+        phase: fault_active
+      - type: ipsec_sa_up
+        target: hub-ce1
+        params:
+          connection: vti102
+        phase: fault_active
+      - type: ipsec_sa_down
+        target: hub-ce1
+        params:
+          connection: vti104
+          duration_sec: 60
+        phase: sustained_fault
+      - type: ipsec_sa_up
+        target: hub-ce1
+        params:
+          connection: vti103
+        phase: sustained_fault
+      - type: ipsec_sa_up
+        target: hub-ce1
+        params:
+          connection: vti104
+        phase: recovery
+
+  strongswan_restart:
+    description: >
+      Kill and restart strongSwan on hub-ce1, dropping ALL IPsec SAs
+      simultaneously. Simulates SD-WAN edge reboot or process crash.
+      All overlay BGP sessions re-establish concurrently after IPsec
+      comes back.
+    faults:
+      - type: ipsec_stop
+        target: hub-ce1
+        params: {}
+        phase: fault_active
+      - type: wait
+        target: none
+        params:
+          duration_sec: 10
+        phase: fault_active
+      - type: ipsec_start
+        target: hub-ce1
+        params: {}
+        phase: recovery
+      - type: wait
+        target: none
+        params:
+          duration_sec: 30
+        phase: convergence_wait
+
+  vti_interface_flap:
+    description: >
+      Bring a VTI interface down and up to simulate overlay link
+      state changes. Tests whether FRR detects interface state
+      transitions and propagates BGP withdrawals correctly.
+    faults:
+      - type: vti_down
+        target: hub-ce1
+        params:
+          vti_name: vti106
+          duration_sec: 20
+        phase: fault_active
+      - type: vti_down
+        target: dc2-ce1
+        params:
+          vti_name: vti200
+          duration_sec: 30
+        phase: fault_active
+      - type: vti_up
+        target: hub-ce1
+        params:
+          vti_name: vti106
+        phase: fault_active
+      - type: vti_up
+        target: dc2-ce1
+        params:
+          vti_name: vti200
+        phase: recovery

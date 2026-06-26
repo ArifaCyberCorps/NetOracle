@@ -1,0 +1,71 @@
+# Telemetry Collection Configuration
+
+devices:
+  # P routers (core label-switching)
+  - name: dc1-p1
+    kind: frr
+    role: p
+  - name: dc2-p1
+    kind: frr
+    role: p
+  - name: hub-p1
+    kind: frr
+    role: p
+
+  # PE routers (MPLS edge)
+  - name: dc1-pe1
+    kind: frr
+    role: pe
+  - name: dc2-pe1
+    kind: frr
+    role: pe
+  - name: hub-pe1
+    kind: frr
+    role: pe
+
+  # CE routers (customer edge / SD-WAN overlay)
+  - name: dc1-ce1
+    kind: frr
+    role: ce
+  - name: dc2-ce1
+    kind: frr
+    role: ce
+  - name: hub-ce1
+    kind: frr
+    role: ce
+  - name: branch1-ce1
+    kind: frr
+    role: ce
+  - name: branch2-ce1
+    kind: frr
+    role: ce
+  - name: branch3-ce1
+    kind: frr
+    role: ce
+  - name: branch4-ce1
+    kind: frr
+    role: ce
+  - name: branch5-ce1
+    kind: frr
+    role: ce
+  - name: branch6-ce1
+    kind: frr
+    role: ce
+
+poller_intervals:
+  interface_counters: 10      # seconds
+  bgp_status: 15
+  ospf_neighbors: 30
+  mpls_ldp: 60
+  gre_tunnels: 10
+  ipsec_sa: 15
+  cpu_memory: 60
+
+syslog:
+  listen_host: "0.0.0.0"
+  listen_port: 5514
+  enabled: true
+
+output:
+  dir: "telemetry_data"
+  rotate_hours: 24

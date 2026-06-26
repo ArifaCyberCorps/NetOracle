@@ -1,0 +1,250 @@
+# Traffic Profile Library
+# Each profile defines a type of application traffic to generate
+# Profiles are instantiated per site-pair in the scheduler config
+
+profiles:
+  voice:
+    protocol: mgen
+    dscp: EF
+    dscp_val: 46
+    description: "VoIP RTP stream - 20ms packetization, low jitter tolerance"
+    default_params:
+      rate_kbps: 80
+      packet_size: 200
+      pattern: periodic
+      interval_ms: 20
+      duration_sec: 300
+
+  video:
+    protocol: iperf3
+    mode: udp
+    dscp: AF41
+    dscp_val: 34
+    description: "Video conferencing - bursty UDP stream, moderate bandwidth"
+    default_params:
+      rate_mbps: 2.5
+      packet_size: 1400
+      duration_sec: 300
+      parallel: 2
+
+  business_app:
+    protocol: iperf3
+    mode: tcp
+    dscp: AF21
+    dscp_val: 18
+    description: "Business SaaS/HTTP - TCP request/response bursts"
+    default_params:
+      rate_mbps: 50
+      duration_sec: 300
+      parallel: 4
+      window: 256K
+
+  bulk_transfer:
+    protocol: iperf3
+    mode: tcp
+    dscp: DF
+    dscp_val: 0
+    description: "Bulk backup/file transfer - long-lived, high throughput"
+    default_params:
+      rate_mbps: 200
+      duration_sec: 600
+      parallel: 8
+      window: 1M
+
+  db_erp:
+    protocol: scapy
+    dscp: AF21
+    dscp_val: 18
+    description: "Database/ERP query-response - small packets, high frequency, RTT-sensitive"
+    default_params:
+      rate_pps: 500
+      packet_size: 256
+      duration_sec: 300
+      burst_size: 10
+      burst_interval_ms: 100
+
+  # ============ APPLICATION-LAYER PROFILES ============
+
+  http_traffic:
+    protocol: http
+    dscp: AF21
+    dscp_val: 18
+    description: "Real HTTP/1.1 GET requests - Python urllib, random pages, configurable RPS"
+    default_params:
+      port: 8080
+      rate_rps: 10
+      duration_sec: 300
+      page_count: 20
+      ssl: false
+
+  https_traffic:
+    protocol: https
+    dscp: AF21
+    dscp_val: 18
+    description: "Real HTTPS/TLS GET requests - self-signed cert, Python urllib+ssl"
+    default_params:
+      port: 8443
+      rate_rps: 8
+      duration_sec: 300
+      page_count: 20
+      ssl: true
+
+  ftp_traffic:
+    protocol: ftp
+    dscp: DF
+    dscp_val: 0
+    description: "Real FTP file transfers - pyftpdlib server, ftplib client, multi-MB files"
+    default_params:
+      port: 21
+      action: download
+      file_size_max_mb: 10
+      interval_sec: 5
+      duration_sec: 300
+
+  smb_traffic:
+    protocol: smb
+    dscp: DF
+    dscp_val: 0
+    description: "Real SMB/CIFS file reads - smbprotocol client/server, 2MB shared files"
+    default_params:
+      port: 445
+      interval_sec: 10
+      duration_sec: 300
+
+  dns_traffic:
+    protocol: dns
+    dscp: CS6
+    dscp_val: 48
+    description: "Real DNS A-record queries - UDP, random domains, configurable QPS"
+    default_params:
+      port: 5353
+      rate_qps: 50
+      duration_sec: 300
+
+  voip_rtp:
+    protocol: voip
+    dscp: EF
+    dscp_val: 46
+    description: "Real RTP packet stream - structured RTP headers, 20ms packetization"
+    default_params:
+      port: 5004
+      rate_kbps: 80
+      packet_size: 200
+      interval_ms: 20
+      duration_sec: 300
+
+  database_erp:
+    protocol: database
+    dscp: AF21
+    dscp_val: 18
+    description: "Real DB query-response - SQL-like payloads, burst pattern, DSCP-tagged"
+    default_params:
+      port: 5432
+      rate_pps: 500
+      packet_size: 256
+      duration_sec: 300
+      burst_size: 10
+
+  background_noise:
+    protocol: iperf3
+    mode: tcp
+    dscp: DF
+    dscp_val: 0
+    description: "Background noise traffic - low constant rate for baseline realism"
+    default_params:
+      rate_mbps: 5
+      duration_sec: 3600
+      parallel: 1
+      window: 64K
+
+site_pairs:
+  - name: branch1_to_hub
+    source: branch1-host
+    source_ip: 172.16.3.2
+    dest: hub-host
+    dest_ip: 172.16.2.2
+    path_type: underlay_overlay
+
+  - name: branch1_to_dc1
+    source: branch1-host
+    source_ip: 172.16.3.2
+    dest: dc1-host
+    dest_ip: 172.16.0.2
+    path_type: underlay_overlay
+
+  - name: branch2_to_hub
+    source: branch2-host
+    source_ip: 172.16.4.2
+    dest: hub-host
+    dest_ip: 172.16.2.2
+    path_type: underlay_overlay
+
+  - name: branch2_to_dc1
+    source: branch2-host
+    source_ip: 172.16.4.2
+    dest: dc1-host
+    dest_ip: 172.16.0.2
+    path_type: underlay_overlay
+
+  - name: branch3_to_hub
+    source: branch3-host
+    source_ip: 172.16.5.2
+    dest: hub-host
+    dest_ip: 172.16.2.2
+    path_type: underlay_overlay
+
+  - name: branch3_to_dc1
+    source: branch3-host
+    source_ip: 172.16.5.2
+    dest: dc1-host
+    dest_ip: 172.16.0.2
+    path_type: underlay_overlay
+
+  - name: branch4_to_hub
+    source: branch4-host
+    source_ip: 172.16.6.2
+    dest: hub-host
+    dest_ip: 172.16.2.2
+    path_type: underlay_overlay
+
+  - name: branch4_to_dc1
+    source: branch4-host
+    source_ip: 172.16.6.2
+    dest: dc1-host
+    dest_ip: 172.16.0.2
+    path_type: underlay_overlay
+
+  - name: branch5_to_dc2
+    source: branch5-host
+    source_ip: 172.16.7.2
+    dest: dc2-host
+    dest_ip: 172.16.1.2
+    path_type: underlay_overlay
+
+  - name: branch6_to_hub
+    source: branch6-host
+    source_ip: 172.16.8.2
+    dest: hub-host
+    dest_ip: 172.16.2.2
+    path_type: underlay_overlay
+
+  - name: dc1_to_hub
+    source: dc1-host
+    source_ip: 172.16.0.2
+    dest: hub-host
+    dest_ip: 172.16.2.2
+    path_type: underlay_overlay
+
+  - name: dc2_to_hub
+    source: dc2-host
+    source_ip: 172.16.1.2
+    dest: hub-host
+    dest_ip: 172.16.2.2
+    path_type: underlay_overlay
+
+  - name: dc1_to_dc2
+    source: dc1-host
+    source_ip: 172.16.0.2
+    dest: dc2-host
+    dest_ip: 172.16.1.2
+    path_type: underlay_overlay

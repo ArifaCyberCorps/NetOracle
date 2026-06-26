@@ -1,0 +1,10 @@
+FROM frrouting/frr:9.1
+
+# Pre-install strongSwan for IPsec VTI overlay tunnels
+# This avoids runtime network calls in air-gapped deployments
+RUN apk add --no-cache strongswan
+
+# Copy the IPsec VTI setup script + tunnel health monitor
+COPY scripts/setup_ipsec.sh /usr/local/bin/setup_ipsec.sh
+COPY scripts/tunnel_health.sh /usr/local/bin/tunnel_health.sh
+RUN chmod 755 /usr/local/bin/setup_ipsec.sh /usr/local/bin/tunnel_health.sh

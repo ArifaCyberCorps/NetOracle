@@ -1,0 +1,297 @@
+{
+  "title": "NetOracle Network Overview",
+  "uid": "netoracle-network-overview",
+  "version": 1,
+  "schemaVersion": 36,
+  "timezone": "utc",
+  "refresh": "15s",
+  "panels": [
+    {
+      "title": "Top Interfaces by Throughput",
+      "type": "bargauge",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0},
+      "targets": [
+        {
+          "expr": "topk(10, netoracle_iface_tx_bps + netoracle_iface_rx_bps)",
+          "legendFormat": "{{device}}/{{interface}}",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "orientation": "horizontal",
+        "displayMode": "gradient",
+        "showUnfilled": true,
+        "calcs": ["lastNotNull"]
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bps",
+          "thresholds": {
+            "steps": [
+              {"color": "green", "value": null},
+              {"color": "orange", "value": 500000000},
+              {"color": "red", "value": 900000000}
+            ]
+          }
+        }
+      }
+    },
+    {
+      "title": "Interface Error Rate",
+      "type": "timeseries",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0},
+      "targets": [
+        {
+          "expr": "rate(netoracle_iface_rx_errors[1m])",
+          "legendFormat": "rx {{device}}/{{interface}}",
+          "refId": "A"
+        },
+        {
+          "expr": "rate(netoracle_iface_tx_errors[1m])",
+          "legendFormat": "tx {{device}}/{{interface}}",
+          "refId": "B"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "cps",
+          "thresholds": {"steps": [{"color": "green", "value": null}, {"color": "red", "value": 10}]}
+        }
+      }
+    },
+    {
+      "title": "BGP Peer Status",
+      "type": "stat",
+      "gridPos": {"h": 6, "w": 6, "x": 0, "y": 8},
+      "targets": [
+        {
+          "expr": "count(netoracle_bgp_state == 1)",
+          "legendFormat": "Established",
+          "refId": "A"
+        },
+        {
+          "expr": "count(netoracle_bgp_state == 0)",
+          "legendFormat": "Down",
+          "refId": "B"
+        }
+      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "horizontal",
+        "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false},
+        "textMode": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "steps": [
+              {"color": "red", "value": null},
+              {"color": "orange", "value": 1},
+              {"color": "green", "value": 5}
+            ]
+          }
+        }
+      }
+    },
+    {
+      "title": "BGP Prefixes per Peer",
+      "type": "table",
+      "gridPos": {"h": 6, "w": 6, "x": 6, "y": 8},
+      "targets": [
+        {
+          "expr": "netoracle_bgp_prefixes",
+          "format": "table",
+          "instant": true,
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "sortBy": [{"displayName": "Value", "desc": true}]
+      }
+    },
+    {
+      "title": "OSPF Neighbor State",
+      "type": "stat",
+      "gridPos": {"h": 6, "w": 6, "x": 12, "y": 8},
+      "targets": [
+        {
+          "expr": "count(netoracle_ospf_state == 1)",
+          "legendFormat": "Full",
+          "refId": "A"
+        },
+        {
+          "expr": "count(netoracle_ospf_state == 0)",
+          "legendFormat": "Down",
+          "refId": "B"
+        },
+        {
+          "expr": "count(netoracle_ospf_state > 0 and netoracle_ospf_state < 1)",
+          "legendFormat": "Transitioning",
+          "refId": "C"
+        }
+      ],
+      "options": {
+        "reduceOptions": {"calcs": ["lastNotNull"]}
+      },
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "steps": [
+              {"color": "red", "value": null},
+              {"color": "orange", "value": 1},
+              {"color": "green", "value": 5}
+            ]
+          }
+        }
+      }
+    },
+    {
+      "title": "Device Memory Utilization",
+      "type": "bargauge",
+      "gridPos": {"h": 6, "w": 6, "x": 18, "y": 8},
+      "targets": [
+        {
+          "expr": "netoracle_mem_used_pct",
+          "legendFormat": "{{device}}",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "orientation": "horizontal",
+        "displayMode": "gradient",
+        "calcs": ["lastNotNull"]
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "min": 0,
+          "max": 100,
+          "thresholds": {
+            "steps": [
+              {"color": "green", "value": null},
+              {"color": "orange", "value": 60},
+              {"color": "red", "value": 85}
+            ]
+          }
+        }
+      }
+    },
+    {
+      "title": "Interface Throughput Timeline (Top 5)",
+      "type": "timeseries",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 14},
+      "targets": [
+        {
+          "expr": "topk(5, netoracle_iface_tx_bps)",
+          "legendFormat": "tx {{device}}/{{interface}}",
+          "refId": "A"
+        },
+        {
+          "expr": "topk(5, netoracle_iface_rx_bps)",
+          "legendFormat": "rx {{device}}/{{interface}}",
+          "refId": "B"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bps"
+        }
+      }
+    },
+    {
+      "title": "GRE Tunnel Throughput",
+      "type": "timeseries",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 14},
+      "targets": [
+        {
+          "expr": "rate(netoracle_tunnel_tx_bytes[1m]) * 8",
+          "legendFormat": "tx {{device}}/{{tunnel}}",
+          "refId": "A"
+        },
+        {
+          "expr": "rate(netoracle_tunnel_rx_bytes[1m]) * 8",
+          "legendFormat": "rx {{device}}/{{tunnel}}",
+          "refId": "B"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {"unit": "bps"}
+      }
+    },
+    {
+      "title": "System Load (1m Average)",
+      "type": "timeseries",
+      "gridPos": {"h": 6, "w": 12, "x": 0, "y": 22},
+      "targets": [
+        {
+          "expr": "netoracle_load_1m",
+          "legendFormat": "{{device}}",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "thresholds": {
+            "steps": [
+              {"color": "green", "value": null},
+              {"color": "orange", "value": 4},
+              {"color": "red", "value": 8}
+            ]
+          }
+        }
+      }
+    },
+    {
+      "title": "MPLS Label Count per Device",
+      "type": "bargauge",
+      "gridPos": {"h": 6, "w": 12, "x": 12, "y": 22},
+      "targets": [
+        {
+          "expr": "count(netoracle_mpls_label_count) by (device)",
+          "legendFormat": "{{device}}",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "orientation": "horizontal",
+        "displayMode": "gradient",
+        "calcs": ["lastNotNull"]
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none"
+        }
+      }
+    }
+  ],
+  "templating": {
+    "list": [
+      {
+        "name": "device",
+        "type": "query",
+        "query": "label_values(netoracle_iface_tx_bytes, device)",
+        "current": {"text": "All", "value": "$__all"},
+        "includeAll": true,
+        "multi": true
+      }
+    ]
+  },
+  "annotations": {
+    "list": [
+      {
+        "name": "Fault Events",
+        "type": "dashboard",
+        "enable": true,
+        "iconColor": "red",
+        "query": "netoracle_telemetry{event_type=\"fault\"}"
+      }
+    ]
+  },
+  "time": {"from": "now-1h", "to": "now"},
+  "timepicker": {
+    "refresh_intervals": ["15s", "30s", "1m", "5m", "15m", "30m", "1h"]
+  }
+}
